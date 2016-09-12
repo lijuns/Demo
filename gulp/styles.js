@@ -16,13 +16,15 @@ gulp.task('styles', function () {
   };
 
   var injectFiles = gulp.src([
-    path.join(conf.paths.src, '/app/**/*.scss'),
-    path.join('!' + conf.paths.src, '/app/index.scss')
+    path.join(conf.paths.src, '/app/scss/**/*.scss'),
+    path.join('!' + conf.paths.src, '/app/scss/bootstrap/**/*.scss'),
+    path.join('!' + conf.paths.src, '/app/scss/_bootstrap.scss'),
+    path.join('!' + conf.paths.src, '/app/scss/app.scss')
   ], { read: false });
 
   var injectOptions = {
     transform: function(filePath) {
-      filePath = filePath.replace(conf.paths.src + '/app/', '');
+      filePath = filePath.replace(conf.paths.src + '/app/scss/', '');
       return '@import "' + filePath + '";';
     },
     starttag: '// injector',
@@ -32,9 +34,9 @@ gulp.task('styles', function () {
 
 
   return gulp.src([
-    path.join(conf.paths.src, '/app/index.scss')
+    path.join(conf.paths.src, '/app/scss/app.scss')
   ])
-    .pipe($.inject(injectFiles, injectOptions))
+    // .pipe($.inject(injectFiles, injectOptions))
     .pipe($.sourcemaps.init())
     .pipe($.sass(sassOptions)).on('error', conf.errorHandler('Sass'))
     .pipe($.autoprefixer()).on('error', conf.errorHandler('Autoprefixer'))
