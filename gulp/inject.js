@@ -10,10 +10,11 @@ var _ = require('lodash');
 
 gulp.task('inject', ['scripts', 'styles'], function () {
   var injectStyles = gulp.src([
-    path.join(conf.paths.tmp, '/serve/app/**/*.css'),
-    path.join(conf.paths.tmp, '/serve/app/**/*.js'),
-    path.join('!' + conf.paths.tmp, '/serve/app/vendor.css'),
-    path.join('!' + conf.paths.tmp, '/serve/app/vendor.js')
+    path.join(conf.paths.tmp, '/serve/styles/*.css'),
+    path.join(conf.paths.tmp, '/serve/libs/*.js'),
+    path.join(conf.paths.tmp, '/serve/scripts/*.js'),
+    path.join('!' + conf.paths.tmp, '/serve/vendor.css'),
+    path.join('!' + conf.paths.tmp, '/serve/vendor.js')
   ], { read: false });
 
   var injectOptions = {
